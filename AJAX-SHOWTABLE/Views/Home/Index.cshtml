@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div class="form-inline">
+    <br>
+    <label>Input Your EmpID</label>
+    <input type="text" id="empid" class="form-control" />
+    <input type="button" id="btnSearch" value="Search" class="btn btn-primary " />
+
+</div>
+    <br>
+    <div id="PartialData"></div>
+
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.core.css" rel="stylesheet">
+<link href="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.default.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.min.js"></script>  
+    <script>
+        $(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("PartialData")',
+                dataType: 'html',
+                success: function (r) {
+                    $('#PartialData').html(r);
+                }
+            });
+
+            $('#btnSearch').click(function () {
+                if ($('#empid').val() == '' || $('#empid').val() == ' ') {
+                    alertify.alert('input cannot empty');
+                    return;
+                }
+                $.ajax({
+                    type: 'GET',
+                    data: { "empid": $('#empid').val() },
+                    url: '@Url.Action("PartialData")',
+                    dataType: 'html',
+                    success: function (r) {
+                        $('#PartialData').html(r);
+                    }
+                });
+            });
+        });
+    </script>
+

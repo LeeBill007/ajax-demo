@@ -1,0 +1,49 @@
+﻿@model AJAX_SHOWTABLE.Models.IndexViewModel
+
+@if (Model.IsSuccess)
+{
+    <h1>PartialView</h1>
+    <br>
+    <br>
+    <a href='@Url.Action("Create" )?' class="btn btn-info">Create</a>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>修改</td>
+            <td>EmpID</td>
+            <td>EmpName</td>
+            <td>EmpBirthday</td>
+            <td>Gender</td>
+            <td>BuildDate</td>
+            <td>LogingDate</td>
+            <td>JobTitle</td>
+            <td>UnitID</td>
+            <td>UnitName</td>
+            <td>Seniority</td>
+        </tr>
+
+
+
+        @foreach (var item in Model.DataEmp) //C#程式碼
+
+        {
+            <tr>
+                <td><a href='@Url.Action("Edit")?empid=@item.EmpID'>Edit</a></td>
+                <td>@item.EmpID</td>
+                <td>@item.EmpName</td>
+                <td>@item.EmpBirthday.ToString("d")</td>
+                <td>@item.Gender</td>
+                <td>@item.BuildDate.ToString("d")</td>
+                <td>@item.LogingDate.ToString("d")</td>
+                <td>@item.JobTitle</td>
+                <td>@item.UnitID</td>
+                <td>@item.UnitName</td>
+                <td>@item.Seniority</td>
+            </tr>
+        }
+    </table>
+}
+
+else
+{
+    <div class="alert alert-danger">@Model.Msg</div>
+}

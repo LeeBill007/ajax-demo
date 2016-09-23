@@ -1,0 +1,94 @@
+﻿@model AJAX_SHOWTABLE.Models.DataEmp
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+<form id="form" action="" method="post">
+    <div class="form-horizontal ">
+        <div class="form-group">
+            <label class="col-md-2 ">EmpID</label>
+            <input type="text"  id="empid" class="text-info col-md-10" >
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">EmpName</label>
+            <input type="text"  id="empname" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">EmpBirthday</label>
+            <input type="text"  id="empbirthday" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">Gender</label>
+            <input type="text"  id="gender" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">BuildDate</label>
+            <input type="text"  id="builddate" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">LogingDate</label>
+            <input type="text"  id="logingdate" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">JobTitle</label>
+            <input type="text"  id="jobtitle" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">UnitID</label>
+            <input type="text"  id="unitid" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">UnitName</label>
+            <input type="text"  id="unitname" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">Seniority</label>
+            <input type="text"  id="seniority" class="text-info col-md-10">
+        </div>
+
+        <input type="button" value="儲存" id="save" class="btn btn-success btn-lg">
+    </div>
+</form>
+
+<script>
+    $(function () {
+       
+
+        $('#save').click(function () {
+            //var frm = $(document.form);
+            //var dat = JSON.stringify(frm.serializeArray());
+           
+            var obj = {
+                //empid: $('#empid').val(),
+                empname: $("#empname").val(),
+                empbirthday: $("#empbirthday").val(),
+                gender: $("#gender").val(),
+                builddate: $("#builddate").val(),
+                logingdate: $("#logingdate").val(),
+                jobtitle: $("#jobtitle").val(),
+                unitid: $("#unitid").val(),
+                unitname: $("#unitname").val(),
+                seniority: $("#seniority").val()
+            }
+
+
+            $.ajax({
+                type:'POST',
+                data: JSON.stringify(obj),
+                contentType: 'application/json',
+                url:'@Url.Action("Create")',
+                dataType: 'Json',
+                success: function () {
+                    alert('修改成功');
+                    window.location.href = 'Index';
+
+                }
+            })
+        })
+    })
+
+   
+
+</script>

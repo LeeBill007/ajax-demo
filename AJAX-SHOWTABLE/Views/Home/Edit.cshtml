@@ -1,0 +1,122 @@
+﻿@model AJAX_SHOWTABLE.Models.DataEmp
+@{
+    ViewBag.Title = "Edit";
+}
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script language="JavaScript">
+    $(document).ready(function(){
+        $("#empbirthday").datepicker({ dateFormat: "yy-mm-dd" });
+        $("#builddate").datepicker({ dateFormat: "yy-mm-dd" });
+        $("#logingdate").datepicker({ dateFormat: "yy-mm-dd" });
+    });
+</script>
+
+<h2>資料修改頁</h2>
+<br>
+<form id="form" action="" method="post">
+    <div class="form-horizontal ">
+        <div class="form-group">
+            <label class="col-md-2 ">EmpID</label>
+            <input type="text" value=@Model.EmpID id="empid" class="text-info col-md-10" disabled="disabled">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">EmpName</label>
+            <input type="text" value=@Model.EmpName id="empname" name="empname" class="text-info col-md-10 " >
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">EmpBirthday</label>
+            <input type="text" value=@Model.EmpBirthday id="empbirthday" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">Gender</label>
+            <input type="text" value=@Model.Gender id="gender" name="gender" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">BuildDate</label>
+            <input type="text" value=@Model.BuildDate id="builddate" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">LogingDate</label>
+            <input type="text" value=@Model.LogingDate id="logingdate" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">JobTitle</label>
+            <input type="text" value=@Model.JobTitle id="jobtitle" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">UnitID</label>
+            <input type="text" value=@Model.UnitID id="unitid" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">UnitName</label>
+            <input type="text" value=@Model.UnitName id="unitname" class="text-info col-md-10">
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 ">Seniority</label>
+            <input type="text" value=@Model.Seniority id="seniority" class="text-info col-md-10">
+        </div>
+
+        <input type="button" value="儲存" id="save" class="btn btn-success btn-lg">
+    </div>
+</form>
+
+
+
+
+@*alert  script*@
+<link href="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.core.css" rel="stylesheet">
+<link href="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.default.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.min.js"></script>
+
+@*form validation*@
+@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
+    <script src="~/Scripts/jquery.validate.js"></script>
+<script>        
+    $(document).ready(function(){
+    $("#form").validate({
+        rules: {
+            empname: {
+                required: true,  
+                equalTo: '#gender'
+            }
+        }
+    })
+})
+</script>
+<script>
+    $(function () {
+            $('#save').click(function () {
+
+            var obj = {
+                empid: $('#empid').val(),
+                empname: $("#empname").val(),
+                empbirthday: $("#empbirthday").val(),
+                gender: $("#gender").val(),
+                builddate: $("#builddate").val(),
+                logingdate: $("#logingdate").val(),
+                jobtitle: $("#jobtitle").val(),
+                unitid: $("#unitid").val(),
+                unitname: $("#unitname").val(),
+                seniority: $("#seniority").val()
+            }
+
+
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(obj),
+                contentType: 'application/json',
+                url: '@Url.Action("Edit")',
+                dataType: 'Json',
+                success: function () {
+                    alert('修改成功');
+                    window.location.href = 'Index';
+
+                }
+            })
+        })
+    })
+    
+</script>
+
