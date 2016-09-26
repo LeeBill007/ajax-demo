@@ -6813,4 +6813,8 @@ td.visible-print {
   td.hidden-print {
     display: none !important;
   }
+
+}
+.my-error-class {
+    color:red;
 }

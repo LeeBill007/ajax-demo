@@ -5,61 +5,125 @@
 }
 
 <h2>Create</h2>
-<form id="form" action="" method="post">
+<form id="myform" action="" method="post">
     <div class="form-horizontal ">
         <div class="form-group">
             <label class="col-md-2 ">EmpID</label>
-            <input type="text"  id="empid" class="text-info col-md-10" >
+            <input type="text" id="empid" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">EmpName</label>
-            <input type="text"  id="empname" class="text-info col-md-10">
+            <input type="text" id="empname" name="empname" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">EmpBirthday</label>
-            <input type="text"  id="empbirthday" class="text-info col-md-10">
+            <input type="text" id="empbirthday" name="empbirthday" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">Gender</label>
-            <input type="text"  id="gender" class="text-info col-md-10">
+            <input type="text" id="gender" name="gender" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">BuildDate</label>
-            <input type="text"  id="builddate" class="text-info col-md-10">
+            <input type="text" id="builddate" name="builddate" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">LogingDate</label>
-            <input type="text"  id="logingdate" class="text-info col-md-10">
+            <input type="text" id="logingdate" name="logingdate" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">JobTitle</label>
-            <input type="text"  id="jobtitle" class="text-info col-md-10">
+            <input type="text" id="jobtitle" name="jobtitle" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">UnitID</label>
-            <input type="text"  id="unitid" class="text-info col-md-10">
+            <input type="text" id="unitid" name="unitid" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">UnitName</label>
-            <input type="text"  id="unitname" class="text-info col-md-10">
+            <input type="text" id="unitname"  name="unitname"class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">Seniority</label>
-            <input type="text"  id="seniority" class="text-info col-md-10">
+            <input type="text" id="seniority"  name="seniority" class="text-info col-md-10">
         </div>
 
         <input type="button" value="儲存" id="save" class="btn btn-success btn-lg">
     </div>
 </form>
 
+
+<script src="~/Scripts/jquery.validate.js"></script>
 <script>
     $(function () {
-       
+        $('#myform').validate({
+            errorClass: "my-error-class",
+            event: "blur",
+            rules: {
+                empname: {
+                    required: true,
+                    minlength: 2
+                },
+                empbirthday: {
+                    required: true,
+                    dateISO: true
+                },
+                gender: {
+                    required: true,
+                    minlength: 2
+                },
+                builddate: {
+                    required: true,
+                    dateISO: true
+                },
+                logingdate: {
+                    required: true,
+                    dateISO: true
+                },
+                jobtitle: { required: true },
+                unitid: { required: true },
+                unitname: { required: true },
+                seniority: { required: true },
+            },
+
+            messages: {
+                empname: { required: "请務必输入" },
+                empbirthday: {
+                    required: "请務必输入",
+                    dateISO: "请输入正確的日期"
+                },
+                gender: { required: "请務必输入" },
+                builddate: {
+                    required: "请務必输入",
+                    dateISO: "请输入正確的日期"
+                },
+                logingdate: {
+                    required: "请務必输入",
+                    dateISO: "请输入正確的日期"
+                },
+                jobtitle: { required: "请務必输入" },
+                unitid: { required: "请務必输入" },
+                unitname: { required: "请務必输入" },
+                seniority: { required: "请務必输入" },
+
+            }
+
+
+        })
+    })
+</script>
+
+<script>
+    $(function () {
 
         $('#save').click(function () {
-            //var frm = $(document.form);
-            //var dat = JSON.stringify(frm.serializeArray());
-           
+            if ($('#myform').valid()) {
+                alert('資料填入正確');
+            } else {
+                alert('資料填入有誤');
+                return;
+            }
+
             var obj = {
                 //empid: $('#empid').val(),
                 empname: $("#empname").val(),
@@ -75,10 +139,10 @@
 
 
             $.ajax({
-                type:'POST',
+                type: 'POST',
                 data: JSON.stringify(obj),
                 contentType: 'application/json',
-                url:'@Url.Action("Create")',
+                url: '@Url.Action("Create")',
                 dataType: 'Json',
                 success: function () {
                     alert('修改成功');
@@ -89,6 +153,6 @@
         })
     })
 
-   
+
 
 </script>
