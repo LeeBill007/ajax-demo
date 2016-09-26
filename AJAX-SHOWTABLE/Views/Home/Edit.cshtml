@@ -57,8 +57,7 @@
             <label class="col-md-2 ">Seniority</label>
             <input type="text" value=@Model.Seniority id="seniority" name="seniority" class="text-info col-md-10">
         </div>
-
-        @*<input type="button" value="儲存button驗證" id="buttonsave" class="btn btn-success btn-lg">*@
+              
         <input type="button" value="儲存" id="save" class="btn btn-success btn-lg">
     </div>
 </form>
@@ -138,7 +137,7 @@
                 if ($('#myform').valid()) {
                     //alert('資料填入正確');
                 } else {
-                    //alert('資料填入有誤');
+                    alert('資料填入有誤');
                     return;
                 }              
 
