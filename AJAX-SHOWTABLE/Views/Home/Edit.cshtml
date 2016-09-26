@@ -6,7 +6,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
 <script language="JavaScript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         $("#empbirthday").datepicker({ dateFormat: "yy-mm-dd" });
         $("#builddate").datepicker({ dateFormat: "yy-mm-dd" });
         $("#logingdate").datepicker({ dateFormat: "yy-mm-dd" });
@@ -15,7 +15,7 @@
 
 <h2>資料修改頁</h2>
 <br>
-<form id="form" action="" method="post">
+<form id="myform" action="" method="post">
     <div class="form-horizontal ">
         <div class="form-group">
             <label class="col-md-2 ">EmpID</label>
@@ -23,11 +23,11 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 ">EmpName</label>
-            <input type="text" value=@Model.EmpName id="empname" name="empname" class="text-info col-md-10 " >
+            <input type="text" value=@Model.EmpName id="empname" name="empname" class="text-info col-md-10 ">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">EmpBirthday</label>
-            <input type="text" value=@Model.EmpBirthday id="empbirthday" class="text-info col-md-10">
+            <input type="text" value=@Model.EmpBirthday id="empbirthday" name="empbirthday" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">Gender</label>
@@ -35,29 +35,30 @@
         </div>
         <div class="form-group">
             <label class="col-md-2 ">BuildDate</label>
-            <input type="text" value=@Model.BuildDate id="builddate" class="text-info col-md-10">
+            <input type="text" value=@Model.BuildDate id="builddate" name="builddate" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">LogingDate</label>
-            <input type="text" value=@Model.LogingDate id="logingdate" class="text-info col-md-10">
+            <input type="text" value=@Model.LogingDate id="logingdate" name="logingdate" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">JobTitle</label>
-            <input type="text" value=@Model.JobTitle id="jobtitle" class="text-info col-md-10">
+            <input type="text" value=@Model.JobTitle id="jobtitle" name="jobtitle" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">UnitID</label>
-            <input type="text" value=@Model.UnitID id="unitid" class="text-info col-md-10">
+            <input type="text" value=@Model.UnitID id="unitid" name="unitid" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">UnitName</label>
-            <input type="text" value=@Model.UnitName id="unitname" class="text-info col-md-10">
+            <input type="text" value=@Model.UnitName id="unitname" name="unitname" class="text-info col-md-10">
         </div>
         <div class="form-group">
             <label class="col-md-2 ">Seniority</label>
-            <input type="text" value=@Model.Seniority id="seniority" class="text-info col-md-10">
+            <input type="text" value=@Model.Seniority id="seniority" name="seniority" class="text-info col-md-10">
         </div>
 
+        @*<input type="button" value="儲存button驗證" id="buttonsave" class="btn btn-success btn-lg">*@
         <input type="button" value="儲存" id="save" class="btn btn-success btn-lg">
     </div>
 </form>
@@ -72,51 +73,82 @@
 
 @*form validation*@
 @*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
-    <script src="~/Scripts/jquery.validate.js"></script>
-<script>        
-    $(document).ready(function(){
-    $("#form").validate({
-        rules: {
-            empname: {
-                required: true,  
-                equalTo: '#gender'
-            }
-        }
-    })
-})
-</script>
+<script src="~/Scripts/jquery.validate.js"></script>
 <script>
     $(function () {
-            $('#save').click(function () {
+        $('#myform').validate({
+            event: "blur",
+            rules: {
+                empname: {
+                    required: true,
+                    minlength: 2
+                },
+                empbirthday: { dateISO: true },
+                gender: {
+                    required: true,
+                    minlength: 2
+                },
+                builddate: { dateISO: true },
+                logingdate: { dateISO: true },
+                jobtitle: { required: true },
+                unitid: { required: true },
+                unitname: { required: true },
+                seniority: { required: true },
+            },
+            messages: {
+                empname: { required: "请務必输入" },
+                empbirthday: { dateISO: "请输入正確的日期" },
+                gender: { required: "请務必输入" },
+                builddate: { dateISO: "请输入正確的日期" },
+                logingdate: { dateISO: "请输入正確的日期" },
+                jobtitle: { required: "请務必输入" },
+                unitid: { required: "请務必输入" },
+                unitname: { required: "请務必输入" },
+                seniority: { required: "请務必输入" },
 
-            var obj = {
-                empid: $('#empid').val(),
-                empname: $("#empname").val(),
-                empbirthday: $("#empbirthday").val(),
-                gender: $("#gender").val(),
-                builddate: $("#builddate").val(),
-                logingdate: $("#logingdate").val(),
-                jobtitle: $("#jobtitle").val(),
-                unitid: $("#unitid").val(),
-                unitname: $("#unitname").val(),
-                seniority: $("#seniority").val()
             }
 
 
-            $.ajax({
-                type: 'POST',
-                data: JSON.stringify(obj),
-                contentType: 'application/json',
-                url: '@Url.Action("Edit")',
-                dataType: 'Json',
-                success: function () {
-                    alert('修改成功');
-                    window.location.href = 'Index';
-
-                }
-            })
         })
     })
-    
 </script>
+<script>
+        $(function () {
+            $('#save').click(function () {
+
+                if ($('#empname').val() == "") {
+                    alert("請填入性名");
+                    return;
+                }
+
+                var obj = {
+                    empid: $('#empid').val(),
+                    empname: $("#empname").val(),
+                    empbirthday: $("#empbirthday").val(),
+                    gender: $("#gender").val(),
+                    builddate: $("#builddate").val(),
+                    logingdate: $("#logingdate").val(),
+                    jobtitle: $("#jobtitle").val(),
+                    unitid: $("#unitid").val(),
+                    unitname: $("#unitname").val(),
+                    seniority: $("#seniority").val()
+                }
+
+
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(obj),
+                    contentType: 'application/json',
+                    url: '@Url.Action("Edit")',
+                    dataType: 'Json',
+                    success: function () {
+                        alert('修改成功');
+                        window.location.href = 'Index';
+
+                    }
+                })
+            })
+        })
+
+    </script>
 
