@@ -83,13 +83,22 @@
                     required: true,
                     minlength: 2
                 },
-                empbirthday: { dateISO: true },
+                empbirthday: {
+                    required: true,
+                    dateISO: true
+                },
                 gender: {
                     required: true,
                     minlength: 2
                 },
-                builddate: { dateISO: true },
-                logingdate: { dateISO: true },
+                builddate: {
+                    required: true,
+                    dateISO: true
+                },
+                logingdate: {
+                    required: true,
+                    dateISO: true
+                },
                 jobtitle: { required: true },
                 unitid: { required: true },
                 unitname: { required: true },
@@ -97,10 +106,19 @@
             },
             messages: {
                 empname: { required: "请務必输入" },
-                empbirthday: { dateISO: "请输入正確的日期" },
+                empbirthday: {
+                    required: "请務必输入",
+                    dateISO: "请输入正確的日期"
+                },
                 gender: { required: "请務必输入" },
-                builddate: { dateISO: "请输入正確的日期" },
-                logingdate: { dateISO: "请输入正確的日期" },
+                builddate: {
+                    required: "请務必输入",
+                    dateISO: "请输入正確的日期"
+                },
+                logingdate: {
+                    required: "请務必输入",
+                    dateISO: "请输入正確的日期"
+                },
                 jobtitle: { required: "请務必输入" },
                 unitid: { required: "请務必输入" },
                 unitname: { required: "请務必输入" },
@@ -115,11 +133,13 @@
 <script>
         $(function () {
             $('#save').click(function () {
-
-                if ($('#empname').val() == "") {
-                    alert("請填入性名");
+                //button按下後，form驗證
+                if ($('#myform').valid()) {
+                    //alert('資料填入正確');
+                } else {
+                    //alert('資料填入有誤');
                     return;
-                }
+                }              
 
                 var obj = {
                     empid: $('#empid').val(),
