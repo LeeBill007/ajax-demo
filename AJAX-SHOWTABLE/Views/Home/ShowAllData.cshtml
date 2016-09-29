@@ -6,6 +6,19 @@
 
 <h2>ShowAllData</h2>
 <a href='@Url.Action("Create" )?' class="btn btn-info">Create</a>
+
+@*Jquery-ui ShowDialog*@
+<div id="dialog" title="Create視窗">
+    <p>Create視窗</p>
+</div>
+<button id="opener" class="btn btn-info">Create Dialog Open</button>
+
+
+<div id="Editdialog" title="Edit視窗">
+    <p>Edit視窗</p>
+</div>
+
+
 <table class="table table-bordered table-hover">
     <tr>
         <td>刪除</td>
@@ -44,3 +57,38 @@
     }
 </table>
 
+@*Jquery-ui ShowDialog*@
+<script>
+    $(function () {
+        $("#dialog").dialog({
+            autoOpen: false,
+            height: 600,
+            width: 650,
+            open: function () {
+                $("#dialog").load("@Url.Action("Create")");
+                
+            }
+        });
+        $("#opener").click(function () {
+            $("#dialog").dialog("open");
+            return false;
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $("#Editdialog").dialog({
+            autoOpen: false,
+            height: 600,
+            width: 650,
+            open: function (event, ui) {
+                $(this).load("@Url.Action("Edit")");
+            }
+        });
+        $("#Editopener").click(function () {
+            $("#Editdialog").dialog("open");
+            return false;
+        });
+    });
+</script>

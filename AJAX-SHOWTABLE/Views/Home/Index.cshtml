@@ -9,14 +9,16 @@
     <input type="button" id="btnSearch" value="Search" class="btn btn-primary " />
 
 </div>
-    <br>
-    <div id="PartialData"></div>
+<br>
+@*PartialDatay 資料掛在Index上*@
+<div id="PartialData"></div>
+
 
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.core.css" rel="stylesheet">
 <link href="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.default.css" rel="stylesheet">
-<script src="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.min.js"></script>  
-    <script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.min.js"></script>
+<script>
         $(function () {
             $.ajax({
                 type: 'POST',
@@ -43,5 +45,5 @@
                 });
             });
         });
-    </script>
+</script>
 

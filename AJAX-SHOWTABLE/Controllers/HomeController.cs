@@ -150,7 +150,6 @@ namespace AJAX_SHOWTABLE.Controllers
         public ActionResult Create()
         {
 
-
             return View();
         }
 
@@ -176,13 +175,15 @@ namespace AJAX_SHOWTABLE.Controllers
         {
             using (EmployeeData2Entities db = new EmployeeData2Entities())
             {
-                               
-                Person pedata = db.Person.Where(x => x.EmpID == empid).FirstOrDefault();
+
+                //Person pedata = db.Person.Where(x => x.EmpID == empid).FirstOrDefault();  [上下兩個與法都可以用]
+                Person pedata = db.Person.Find(empid);
                 db.Person.Remove(pedata);
-                CompanyUnit comdata = db.CompanyUnit.Where(y => y.EmpID == empid).FirstOrDefault();
+                //CompanyUnit comdata = db.CompanyUnit.Where(y => y.EmpID == empid).FirstOrDefault();
+                CompanyUnit comdata = db.CompanyUnit.Find(empid);
                 db.CompanyUnit.Remove(comdata);
                 db.SaveChanges();
-
+                
                 return RedirectToAction("ShowAllData");
             }
             

@@ -2,65 +2,58 @@
 @{
     ViewBag.Title = "Edit";
 }
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/hot-sneaks/jquery-ui.css" rel="stylesheet">
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-<script language="JavaScript">
-    $(document).ready(function () {
-        $("#empbirthday").datepicker({ dateFormat: "yy-mm-dd" });
-        $("#builddate").datepicker({ dateFormat: "yy-mm-dd" });
-        $("#logingdate").datepicker({ dateFormat: "yy-mm-dd" });
-    });
-</script>
 
 <h2>資料修改頁</h2>
 <br>
-<form id="myform" action="" method="post">
-    <div class="form-horizontal ">
-        <div class="form-group">
-            <label class="col-md-2 ">EmpID</label>
-            <input type="text" value=@Model.EmpID id="empid" class="text-info col-md-10" disabled="disabled">
+
+
+    <form id="myform" action="" method="post">
+        <div class="form-horizontal ">
+            <div class="form-group">
+                <label class="col-md-2 ">EmpID</label>
+                <input type="text" value=@Model.EmpID id="empid" class="text-info col-md-10" disabled="disabled">
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 ">EmpName</label>
+                <input type="text" value=@Model.EmpName id="empname" name="empname" class="text-info col-md-10 ">
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 ">EmpBirthday</label>
+                <input type="text" value=@Model.EmpBirthday id="empbirthday" name="empbirthday" class="text-info col-md-10">
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 ">Gender</label>
+                <input type="text" value=@Model.Gender id="gender" name="gender" class="text-info col-md-10">
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 ">BuildDate</label>
+                <input type="text" value=@Model.BuildDate id="builddate" name="builddate" class="text-info col-md-10">
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 ">LogingDate</label>
+                <input type="text" value=@Model.LogingDate id="logingdate" name="logingdate" class="text-info col-md-10">
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 ">JobTitle</label>
+                <input type="text" value=@Model.JobTitle id="jobtitle" name="jobtitle" class="text-info col-md-10">
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 ">UnitID</label>
+                <input type="text" value=@Model.UnitID id="unitid" name="unitid" class="text-info col-md-10">
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 ">UnitName</label>
+                <input type="text" value=@Model.UnitName id="unitname" name="unitname" class="text-info col-md-10">
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 ">Seniority</label>
+                <input type="text" value=@Model.Seniority id="seniority" name="seniority" class="text-info col-md-10">
+            </div>
+
+            <input type="button" value="儲存" id="save" class="btn btn-success btn-lg">
         </div>
-        <div class="form-group">
-            <label class="col-md-2 ">EmpName</label>
-            <input type="text" value=@Model.EmpName id="empname" name="empname" class="text-info col-md-10 ">
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 ">EmpBirthday</label>
-            <input type="text" value=@Model.EmpBirthday id="empbirthday" name="empbirthday" class="text-info col-md-10">
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 ">Gender</label>
-            <input type="text" value=@Model.Gender id="gender" name="gender" class="text-info col-md-10">
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 ">BuildDate</label>
-            <input type="text" value=@Model.BuildDate id="builddate" name="builddate" class="text-info col-md-10">
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 ">LogingDate</label>
-            <input type="text" value=@Model.LogingDate id="logingdate" name="logingdate" class="text-info col-md-10">
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 ">JobTitle</label>
-            <input type="text" value=@Model.JobTitle id="jobtitle" name="jobtitle" class="text-info col-md-10">
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 ">UnitID</label>
-            <input type="text" value=@Model.UnitID id="unitid" name="unitid" class="text-info col-md-10">
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 ">UnitName</label>
-            <input type="text" value=@Model.UnitName id="unitname" name="unitname" class="text-info col-md-10">
-        </div>
-        <div class="form-group">
-            <label class="col-md-2 ">Seniority</label>
-            <input type="text" value=@Model.Seniority id="seniority" name="seniority" class="text-info col-md-10">
-        </div>
-              
-        <input type="button" value="儲存" id="save" class="btn btn-success btn-lg">
-    </div>
-</form>
+    </form>
+
 
 
 
@@ -71,8 +64,18 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/alertify.js/0.3.10/alertify.min.js"></script>
 
 @*form validation*@
-@*<script src="~/Scripts/jquery-1.10.2.js"></script>*@
 <script src="~/Scripts/jquery.validate.js"></script>
+
+@*dateTime Picker*@
+<script language="JavaScript">
+    $(document).ready(function () {
+        $("#empbirthday").datepicker({ dateFormat: "yy-mm-dd" });
+        $("#builddate").datepicker({ dateFormat: "yy-mm-dd" });
+        $("#logingdate").datepicker({ dateFormat: "yy-mm-dd" });
+    });
+</script>
+
+@*form validation rule*@
 <script>
     $(function () {
         $('#myform').validate({
@@ -130,6 +133,8 @@
         })
     })
 </script>
+
+@*ajax*@
 <script>
         $(function () {
             $('#save').click(function () {
@@ -139,7 +144,7 @@
                 } else {
                     alert('資料填入有誤');
                     return;
-                }              
+                }
 
                 var obj = {
                     empid: $('#empid').val(),
@@ -171,4 +176,5 @@
         })
 
     </script>
+
 
