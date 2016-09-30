@@ -19,6 +19,7 @@
 </div>
 
 
+
 <table class="table table-bordered table-hover">
     <tr>
         <td>刪除</td>
@@ -42,7 +43,8 @@
     {
         <tr>
             <td><a href='@Url.Action("Remove")?empid=@item.EmpID'>Remove</a></td>
-            <td><a href='@Url.Action("Edit")?empid=@item.EmpID'>Edit</a></td>
+
+            <td><button id="Editopener" href='@Url.Action("Edit")?empid=@item.EmpID'>Edit</button></td>
             <td>@item.EmpID</td>
             <td>@item.EmpName</td>
             <td>@item.EmpBirthday.ToString("d")</td>
@@ -83,7 +85,7 @@
             height: 600,
             width: 650,
             open: function (event, ui) {
-                $(this).load("@Url.Action("Edit")");
+                $(this).load($("#Editopener").attr("href"));
             }
         });
         $("#Editopener").click(function () {
