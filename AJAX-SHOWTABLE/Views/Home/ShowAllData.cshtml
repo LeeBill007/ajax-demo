@@ -6,17 +6,13 @@
 
 <h2>ShowAllData</h2>
 <a href='@Url.Action("Create" )?' class="btn btn-info">Create</a>
+<br>
 
 @*Jquery-ui ShowDialog*@
-<div id="dialog" title="Create視窗">
-    <p>Create視窗</p>
-</div>
+<div id="Createdialog" title="Create視窗">    </div>
 <button id="opener" class="btn btn-info">Create Dialog Open</button>
-
-
-<div id="Editdialog" title="Edit視窗">
-    <p>Edit視窗</p>
-</div>
+<br>
+<div id="Editdialog" title="Edit視窗">   </div>
 
 
 
@@ -44,7 +40,8 @@
         <tr>
             <td><a href='@Url.Action("Remove")?empid=@item.EmpID'>Remove</a></td>
 
-            <td><button id="Editopener" href='@Url.Action("Edit")?empid=@item.EmpID'>Edit</button></td>
+            @*用class 讓script可以取每一個 edit後面的連結*@
+            <td><a class="Editopen" id="@item.EmpID" href='@Url.Action("Edit")?empid=@item.EmpID'>Edit</a></td>
             <td>@item.EmpID</td>
             <td>@item.EmpName</td>
             <td>@item.EmpBirthday.ToString("d")</td>
@@ -57,40 +54,57 @@
             <td>@item.Seniority</td>
         </tr>
     }
+
 </table>
 
 @*Jquery-ui ShowDialog*@
 <script>
-    $(function () {
-        $("#dialog").dialog({
+    $("#opener").on("click", function () {
+        $("#Createdialog").dialog({
             autoOpen: false,
             height: 600,
             width: 650,
+            buttons: {
+                "ok": function () { alert("ok"); },
+                "cancel": function () { $(this).dialog('close'); }
+            },
             open: function () {
-                $("#dialog").load("@Url.Action("Create")");
-                
+                $(this).load("@Url.Action("Create")");
             }
+
         });
-        $("#opener").click(function () {
-            $("#dialog").dialog("open");
-            return false;
-        });
+
+        $("#Createdialog").dialog("open");
+
+        return false;
+
     });
 </script>
 
 <script>
-    $(function () {
+    $(".Editopen").on("click", function () {
+
+        var url = $(this).attr("href");
+        var $this = $(this);
         $("#Editdialog").dialog({
             autoOpen: false,
             height: 600,
             width: 650,
-            open: function (event, ui) {
-                $(this).load($("#Editopener").attr("href"));
+            buttons: {
+                "ok": function() { alert("ok"); },
+                "cancel": function () { $(this).dialog('close'); }
+            },
+            open: function () {
+                //$(this).load(url); // 用 $(".Editopen").attr("href") 無法正確抓到
+            },
+            close: function () {
+                $(this).dialog('close');
             }
         });
-        $("#Editopener").click(function () {
-            $("#Editdialog").dialog("open");
-            return false;
-        });
+
+        $("#Editdialog").dialog("open");
+        return false;
+
     });
+
 </script>
