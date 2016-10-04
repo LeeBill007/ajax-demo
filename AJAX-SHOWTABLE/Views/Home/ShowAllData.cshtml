@@ -92,13 +92,14 @@
             width: 650,
             buttons: {
                 "ok": function() { alert("ok"); },
-                "cancel": function () { $(this).dialog('close'); }
+                "cancel": function () { $(".ui-dialog-titlebar-close").trigger('click');  }
+                
             },
             open: function () {
-                //$(this).load(url); // 用 $(".Editopen").attr("href") 無法正確抓到
+                $(this).load(url); // 用 $(".Editopen").attr("href") 無法正確抓到
             },
-            close: function () {
-                $(this).dialog('close');
+            close: function () {                
+                $(this).dialog().dialog("close");
             }
         });
 
